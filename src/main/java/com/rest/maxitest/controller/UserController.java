@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.maxitest.model.User;
-import com.rest.maxitest.service.UserService;
+import com.rest.maxitest.service.UserServiceImpl;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 	
 	@RequestMapping (value="/users", method=RequestMethod.GET)
 	public ResponseEntity<?> getUsers() {
@@ -37,14 +38,14 @@ public class UserController {
 	@RequestMapping (value="/users", method=RequestMethod.POST)
 	public ResponseEntity<?> addUser(@RequestBody User user){
 		
-		User newUser = userService.addUser();
+		User newUser = userService.addUser(user);
 		return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}
 	
 	@RequestMapping (value="/users/{userId}", method=RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable int userId, @RequestBody User user){
 		
-		User updatedUser = userService.updateUser(userId);
+		User updatedUser = userService.updateUser(userId, user);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
 	
