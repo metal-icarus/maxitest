@@ -1,5 +1,6 @@
 package com.rest.maxitest.model;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,8 @@ public abstract class Person {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@Column(name="number_id")
 	public int getNumberId() {
 		return numberId;
 	}
