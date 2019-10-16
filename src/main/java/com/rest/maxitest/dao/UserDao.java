@@ -6,9 +6,11 @@ import com.rest.maxitest.model.User;
 
 public interface UserDao {
 
-	List<User> getAllUsers();
+	public List<User> getAllUsers();
 	
-	public User getUserById(int id);
+	public List<User> getUserById(int id);
+	
+	public List<User> getUsersByRole(String role);
 	
 	public void addUser(User user);
 	
