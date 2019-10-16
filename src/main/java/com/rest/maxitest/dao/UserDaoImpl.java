@@ -1,14 +1,11 @@
 package com.rest.maxitest.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.rest.maxitest.model.User;
 import com.rest.maxitest.repository.UserJpaRepository;
 
 public class UserDaoImpl implements UserDao {
-	
-	private List<User>users = new ArrayList<>();
 	
 	UserJpaRepository userJpaRepository;
 
@@ -18,7 +15,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<User> getUserById(int id) {
+	public User getUserById(int id) {
 		return userJpaRepository.findById(id);
 	}
 
@@ -28,13 +25,13 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public void addUser(User user) {
-		userJpaRepository.save(user);
+	public User addUser(User user) {
+		return userJpaRepository.save(user);
 	}
 
 	@Override
-	public void updateUser(User user) {
-		userJpaRepository.update(user);
+	public User updateUser(User user) {
+		return userJpaRepository.save(user);
 	}
 
 	@Override

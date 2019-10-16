@@ -8,31 +8,38 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import com.rest.maxitest.model.User;
+import com.rest.maxitest.dao.UserDaoImpl;
 
 @Service
 public class UserServiceImpl implements UserService{
 	
-	public List<User> usersList = null;
+	private List<User> usersList = null;
+	private UserDaoImpl userDao = new UserDaoImpl();
 	
 	public List<User> getUsers() {
 		
-		return usersList;
+		return userDao.getAllUsers();
 	}
 	
 	public User getUser(int userId) {
 		
 		for(User user : usersList) {
 			if(user.getId()==userId)
-				return user;				
+				return userDao.getUserById(userId);				
 		}
 		return null;
+	}
+	
+	@Override
+	public List<User> getUsersByRole(String role) {
+		return userDao.getUsersByRole(role);
 	}
 	
 	public User addUser(User newUser) {
 		newUser.setId(usersList.size()+1);
 		usersList.add(newUser);
 		
-		return newUser;
+		return userDao.addUser(newUser);
 		
 	}
 	
@@ -45,14 +52,14 @@ public class UserServiceImpl implements UserService{
 				user.setRole(Ouser.getRole());
 			}
 			
-			return user;
+			return userDao.updateUser(user);
 		}
 		
 		return null;
 	}
 	
 	public void deleteUser(User user) {
-		usersList.remove(user);
+		userDao.deleteUser(user);
 	}
 
 	@PostConstruct
@@ -75,4 +82,5 @@ public class UserServiceImpl implements UserService{
 		
 		
 	}
+
 }

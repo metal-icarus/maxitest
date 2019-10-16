@@ -8,13 +8,13 @@ public interface UserDao {
 
 	public List<User> getAllUsers();
 	
-	public List<User> getUserById(int id);
+	public User getUserById(int id);
 	
 	public List<User> getUsersByRole(String role);
 	
-	public void addUser(User user);
+	public User addUser(User user);
 	
-	public void updateUser(User user);
+	public User updateUser(User user);
 	
 	public void deleteUser(User user);
 }

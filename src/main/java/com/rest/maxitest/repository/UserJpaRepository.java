@@ -2,23 +2,24 @@ package com.rest.maxitest.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+//import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import com.rest.maxitest.model.User;
 
-public interface UserJpaRepository extends JpaRepository<User, Integer> {
+public interface UserJpaRepository extends CrudRepository<User, Integer> {
 
 	@Query(value = "SELECT * FROM user", nativeQuery=true)
 	public List<User> findAll();
 	
-	public List<User> findById(int id);
+	public User findById(int id);
 	
 	public List<User> findByRole(String role);
 	
 	public User save(User user);
 	
-	public void update(User user);
+	public User update(User user);
 	
 	public void delete(User user);
 	

@@ -10,6 +10,8 @@ public interface UserService {
 	
 	public User getUser(int userId);
 	
+	public List<User> getUsersByRole(String role);
+	
 	public User addUser(User newUser);
 	
 	public User updateUser(int userId, User Ouser);
