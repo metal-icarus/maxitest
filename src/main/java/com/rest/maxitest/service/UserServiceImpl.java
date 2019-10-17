@@ -5,41 +5,47 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rest.maxitest.model.User;
-import com.rest.maxitest.dao.UserDaoImpl;
+import com.rest.maxitest.repository.UserJpaRepository;
+//import com.rest.maxitest.dao.UserDaoImpl;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService{
 	
 	private List<User> usersList = null;
-	private UserDaoImpl userDao = new UserDaoImpl();
+	
+	
+	//private UserDaoImpl userDao = new UserDaoImpl();
+	
+	private UserJpaRepository userJpaRepository;
 	
 	public List<User> getUsers() {
 		
-		return userDao.getAllUsers();
+		return userJpaRepository.findAll();
 	}
 	
 	public User getUser(int userId) {
 		
 		for(User user : usersList) {
 			if(user.getId()==userId)
-				return userDao.getUserById(userId);				
+				return userJpaRepository.findById(userId);				
 		}
 		return null;
 	}
 	
 	@Override
 	public List<User> getUsersByRole(String role) {
-		return userDao.getUsersByRole(role);
+		return userJpaRepository.findByRole(role);
 	}
 	
 	public User addUser(User newUser) {
 		newUser.setId(usersList.size()+1);
 		usersList.add(newUser);
 		
-		return userDao.addUser(newUser);
+		return userJpaRepository.save(newUser);
 		
 	}
 	
@@ -52,14 +58,14 @@ public class UserServiceImpl implements UserService{
 				user.setRole(Ouser.getRole());
 			}
 			
-			return userDao.updateUser(user);
+			return userJpaRepository.save(user);
 		}
 		
 		return null;
 	}
 	
 	public void deleteUser(User user) {
-		userDao.deleteUser(user);
+		userJpaRepository.delete(user);
 	}
 
 	@PostConstruct
