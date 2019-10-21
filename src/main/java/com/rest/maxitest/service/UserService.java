@@ -2,8 +2,11 @@ package com.rest.maxitest.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.rest.maxitest.model.User;
 
+@Service
 public interface UserService {
 	
 	public List<User> getUsers();
@@ -16,6 +19,6 @@ public interface UserService {
 	
 	public User updateUser(int userId, User Ouser);
 	
-	public void deleteUser(User user);
+	public void deleteUser(int userId);
 
 }

@@ -13,18 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.maxitest.model.User;
 import com.rest.maxitest.service.UserService;
+import com.rest.maxitest.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	
-	
+	@Autowired
 	private UserService userService;
 	
 	@RequestMapping (value="/all", method=RequestMethod.GET)
 	public ResponseEntity<?> getUsers() {
 		
 		List<User> users = userService.getUsers();
+		if (users.isEmpty())
+		{
+			return new ResponseEntity<>("NO HAY USUARIOS", HttpStatus.OK);
+		}
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 	
@@ -52,7 +57,7 @@ public class UserController {
 	@RequestMapping (value="/delete/{userId}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable int userId, @RequestBody User user){
 		
-		userService.deleteUser(user);
+		userService.deleteUser(userId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

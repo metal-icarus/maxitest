@@ -30,6 +30,8 @@ public abstract class Person {
 	public void setNumberId(int numberId) {
 		this.numberId = numberId;
 	}
+	
+	@Column
 	public String getName() {
 		return name;
 	}

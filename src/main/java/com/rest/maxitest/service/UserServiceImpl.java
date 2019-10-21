@@ -1,25 +1,26 @@
 package com.rest.maxitest.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rest.maxitest.model.User;
 import com.rest.maxitest.repository.UserJpaRepository;
 //import com.rest.maxitest.dao.UserDaoImpl;
 
-@Service("userService")
+@Service
+@Transactional 
 public class UserServiceImpl implements UserService{
 	
 	private List<User> usersList = null;
 	
 	
 	//private UserDaoImpl userDao = new UserDaoImpl();
-	
+	@Autowired
 	private UserJpaRepository userJpaRepository;
 	
 	public List<User> getUsers() {
@@ -29,11 +30,8 @@ public class UserServiceImpl implements UserService{
 	
 	public User getUser(int userId) {
 		
-		for(User user : usersList) {
-			if(user.getId()==userId)
-				return userJpaRepository.findById(userId);				
-		}
-		return null;
+		return userJpaRepository.findById(userId);				
+
 	}
 	
 	@Override
@@ -42,8 +40,6 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public User addUser(User newUser) {
-		newUser.setId(usersList.size()+1);
-		usersList.add(newUser);
 		
 		return userJpaRepository.save(newUser);
 		
@@ -64,29 +60,29 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
-	public void deleteUser(User user) {
-		userJpaRepository.delete(user);
+	public void deleteUser(int id) {
+		userJpaRepository.deleteById(id);
 	}
 
-	@PostConstruct
-	private void setupUsers() {
-		usersList = new ArrayList<User>();
-		User user = new User();
-		
-		user.setId(1);
-		user.setName("Maxi");
-		user.setNumberId(31444333);
-		user.setRole("Admin");
-		usersList.add(user);
-		
-		user = new User();		
-		user.setId(2);
-		user.setName("Fabi");
-		user.setNumberId(31333444);
-		user.setRole("User");
-		usersList.add(user);
-		
-		
-	}
+//	@PostConstruct
+//	private void setupUsers() {
+//		usersList = new ArrayList<User>();
+//		User user = new User();
+//		
+//		user.setId(1);
+//		user.setName("Maxi");
+//		user.setNumberId(31444333);
+//		user.setRole("Admin");
+//		usersList.add(user);
+//		
+//		user = new User();		
+//		user.setId(2);
+//		user.setName("Fabi");
+//		user.setNumberId(31333444);
+//		user.setRole("User");
+//		usersList.add(user);
+//		
+//		
+//	}
 
 }
