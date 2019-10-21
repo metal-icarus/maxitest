@@ -20,5 +20,9 @@ public interface UserService {
 	public User updateUser(int userId, User Ouser);
 	
 	public void deleteUser(int userId);
+	
+	public List<User> pruebaQueryManual(String name, int numId);
+	
+	public List<User> getByRole(String role);
 
 }

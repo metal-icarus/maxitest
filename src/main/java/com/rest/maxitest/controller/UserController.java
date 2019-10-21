@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.maxitest.model.User;
 import com.rest.maxitest.service.UserService;
-import com.rest.maxitest.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/users")
@@ -59,6 +58,25 @@ public class UserController {
 		
 		userService.deleteUser(userId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping (value="/name/{name}/num/{numId}", method=RequestMethod.GET)
+	public ResponseEntity<?> pruebaManual(@PathVariable String name, @PathVariable int numId){
+		
+		List<User> users = userService.pruebaQueryManual(name, numId);
+		return new ResponseEntity<>(users, HttpStatus.OK);
+	}
+	
+	@RequestMapping (value="/role/{role}", method=RequestMethod.GET)
+	public ResponseEntity<?> getByRole(@PathVariable String role){
+		
+		List<User> users = userService.getUsersByRole(role);
+		if (users.isEmpty())
+		{
+			return new ResponseEntity<>("NO HAY USUARIOS CON ESE ROL", HttpStatus.OK);
+		}
+		return new ResponseEntity<>(users, HttpStatus.OK);
+				
 	}
 	
 	@RequestMapping (value="/", method=RequestMethod.GET)

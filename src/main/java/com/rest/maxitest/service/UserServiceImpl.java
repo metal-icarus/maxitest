@@ -2,24 +2,19 @@ package com.rest.maxitest.service;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rest.maxitest.model.User;
 import com.rest.maxitest.repository.UserJpaRepository;
-//import com.rest.maxitest.dao.UserDaoImpl;
 
 @Service
 @Transactional 
 public class UserServiceImpl implements UserService{
 	
 	private List<User> usersList = null;
-	
-	
-	//private UserDaoImpl userDao = new UserDaoImpl();
+		
 	@Autowired
 	private UserJpaRepository userJpaRepository;
 	
@@ -63,26 +58,13 @@ public class UserServiceImpl implements UserService{
 	public void deleteUser(int id) {
 		userJpaRepository.deleteById(id);
 	}
+	
+	public List<User> pruebaQueryManual(String name, int numId) {
+		return userJpaRepository.pruebaQueryNombreYNumero(name, numId);
+	}
 
-//	@PostConstruct
-//	private void setupUsers() {
-//		usersList = new ArrayList<User>();
-//		User user = new User();
-//		
-//		user.setId(1);
-//		user.setName("Maxi");
-//		user.setNumberId(31444333);
-//		user.setRole("Admin");
-//		usersList.add(user);
-//		
-//		user = new User();		
-//		user.setId(2);
-//		user.setName("Fabi");
-//		user.setNumberId(31333444);
-//		user.setRole("User");
-//		usersList.add(user);
-//		
-//		
-//	}
+	public List<User> getByRole(String role) {
+		return userJpaRepository.findByRole(role);
+	}
 
 }
