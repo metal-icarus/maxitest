@@ -8,8 +8,13 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User extends Person{
 
-	private String role;
+	private String role;	
 	
+	public User(int id, String name, int numId, String role) {
+		super();
+		this.role = role;
+	}
+
 	@Column
 	public String getRole() {
 		return role;
