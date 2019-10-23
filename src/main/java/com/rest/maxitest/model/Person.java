@@ -16,6 +16,12 @@ public abstract class Person {
 	private int numberId;
 	private String name;
 	
+	public Person(int id, int numberId, String name) {
+		this.id = id;
+		this.numberId = numberId;
+		this.name = name;
+	}
+	
 	public int getId() {
 		return id;
 	}

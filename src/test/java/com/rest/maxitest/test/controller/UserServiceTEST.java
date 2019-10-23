@@ -12,7 +12,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.rest.maxitest.model.User;
 import com.rest.maxitest.repository.UserJpaRepository;
-import com.rest.maxitest.service.UserService;
 import com.rest.maxitest.service.UserServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)

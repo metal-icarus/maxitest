@@ -11,7 +11,7 @@ public class User extends Person{
 	private String role;	
 	
 	public User(int id, String name, int numId, String role) {
-		super();
+		super(id, numId, name);
 		this.role = role;
 	}
 
