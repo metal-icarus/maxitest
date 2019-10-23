@@ -25,12 +25,11 @@ import com.rest.maxitest.config.AppConfig;
 import com.rest.maxitest.model.User;
 import com.rest.maxitest.service.UserService;
 
-import ch.qos.logback.core.status.Status;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.MOCK, classes={AppConfig.class})
-class UserControllerTestBIS {
+public class UserControllerTestBIS {
 	
 	private MockMvc mockMvc;
 	
@@ -59,13 +58,12 @@ class UserControllerTestBIS {
 		mockMvc.perform(get("/users/1") 
 		           .accept(MediaType.APPLICATION_JSON))
 		           .andExpect(status().isOk())
-		           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-		           .andExpect(jsonPath("$.id").value(1))
-		           .andExpect(jsonPath("$.name").value("testo"))
-		           .andExpect(jsonPath("$.number_id").value(123))
-				   .andExpect(jsonPath("$.role").value("tester"));
-			
-			
+		           .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		           .andExpect(jsonPath("$.id").value(user.getId()))
+		           .andExpect(jsonPath("$.name").value(user.getName()))
+		           .andExpect(jsonPath("$.numberId").value(user.getNumberId()))
+				   .andExpect(jsonPath("$.role").value(user.getRole()));
+		
 	}
 
 }

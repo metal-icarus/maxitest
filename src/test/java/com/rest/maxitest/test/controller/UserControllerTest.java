@@ -20,7 +20,7 @@ import com.rest.maxitest.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class UserControllerTest {
+public class UserControllerTest {
 	
 	@InjectMocks
 	UserController userController = new UserController();
